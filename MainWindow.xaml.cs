@@ -382,7 +382,7 @@ namespace WpfApp_AutoPlay
             if (currentRecord < readClicks.Count)
             {
                 //second to milisecond
-                setMouseInterval = (int)Math.Round(readClicks[currentRecord].time * 1000);
+                setMouseInterval = (int)Math.Round((readClicks[currentRecord].time + readClicks[currentRecord].customOffsetTime) * 1000);
                 setMouseTimer.Interval = new TimeSpan(0, 0, 0, 0, setMouseInterval);
                 readXPos = readClicks[currentRecord].xPos;
                 readYPos = readClicks[currentRecord].yPos;
