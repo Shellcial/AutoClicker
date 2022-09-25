@@ -1,6 +1,4 @@
-# Auto Play of 7 日之都
-
-- Author: Kame Poon (kamepoonyl@gmail.com)
+# Auto Clicker
 
 ## Application Description
 
