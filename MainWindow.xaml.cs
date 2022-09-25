@@ -239,7 +239,7 @@ namespace WpfApp_AutoPlay
         {
             if (!LoadSaveDirectory())
             {
-                consoleLog.Log("no save directory");
+                consoleLog.Log("no load directory");
                 //path cannot be loaded
                 return;
             }
