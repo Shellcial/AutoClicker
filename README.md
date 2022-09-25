@@ -1,5 +1,6 @@
 # Auto Clicker
-* execute pre-recorded mouse left click event (window only)
+* execute pre-recorded mouse left click event
+* **This app only runs on Window**
 
 ## Develop Environment
 * Window 10
@@ -47,4 +48,3 @@ To solve this, manually set the lnk path for the *programPath* value in setting 
 - There is a customOffsetTime parameter in the save record file, you can adjust the time(in second) to delay or execute the mouse click early.
 - When custom duplicating mouse click, the "order" doesn't mean anything so leave it unchange is fine
 - Keep the app as default resolution (720x480), otherwise UI Components will be shifted and cropped
-- **This app only runs on window**
