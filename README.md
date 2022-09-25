@@ -1,12 +1,11 @@
 # Auto Clicker
-* execute pre-recorded mouse left click event
-* **This app only runs on Window**
+This is a program executes pre-recorded mouse left click event, **it only runs on Window**
 
 - [Develop Environment](#develop-environment)
 - [Setup Guide](#setup-guide)
 - [UI Introduction](#ui-introduction)
 - [Other Instruction](#other-instruction)
-- [Changelog](#Changelog) 
+- [Changelog](#changelog)
 ## Develop Environment
 * Window 10
 * Visual Studio 2022
