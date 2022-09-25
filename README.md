@@ -2,7 +2,6 @@
 * execute pre-recorded mouse left click event
 * **This app only runs on Window**
 
-Index
 - [Develop Environment](#develop-environment)
 - [Setup Guide](#setup-guide)
 - [UI Introduction](#ui-introduction)
@@ -10,6 +9,7 @@ Index
 - [Changelog](#Changelog) 
 ## Develop Environment
 * Window 10
+* Visual Studio 2022
 * WPF
 * .net 6.0
 
