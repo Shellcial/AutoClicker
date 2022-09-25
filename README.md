@@ -2,6 +2,12 @@
 * execute pre-recorded mouse left click event
 * **This app only runs on Window**
 
+Index
+- [Develop Environment](#develop-environment)
+- [Setup Guide](#setup-guide)
+- [UI Introduction](#ui-introduction)
+- [Other Instruction](#other-instruction)
+- [Changelog](#Changelog) 
 ## Develop Environment
 * Window 10
 * WPF
@@ -48,3 +54,7 @@ To solve this, manually set the lnk path for the *programPath* value in setting 
 - There is a customOffsetTime parameter in the save record file, you can adjust the time(in second) to delay or execute the mouse click early.
 - When custom duplicating mouse click, the "order" doesn't mean anything so leave it unchange is fine
 - Keep the app as default resolution (720x480), otherwise UI Components will be shifted and cropped
+
+## Changelog
+### 1.0.0 
+* Initial release
