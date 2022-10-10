@@ -34,7 +34,9 @@ namespace WpfApp_AutoPlay
         Stopwatch stopwatch = new Stopwatch();
         const int mouseRecordInterval = 100;
         bool isRecording = false;
-
+        bool isStarting = false;
+        bool isPause = false;
+        bool isTimerStopped = false;
         //execute mouse record
         int currentRecord = 0;
         int readXPos = 0;
@@ -246,16 +248,25 @@ namespace WpfApp_AutoPlay
 
             LoadProgram();
 
+            //minimize program
+            if ((bool)autoMinimize.IsChecked)
+            {
+                WindowState = WindowState.Minimized;
+
+            }
+
             ReadJsonFile(@$"{loadPath}");
             ShowProgressBar();
+
+            isStarting = true;
         }
 
         private void LoadProgram()
         {
-            string programPath = loadProgramText.Text;
-            if (programPath != "")
+            if ((bool)loadProgramCheckBox.IsChecked)
             {
-                if ((bool)loadProgramCheckBox.IsChecked)
+                string programPath = loadProgramText.Text;
+                if (programPath != "")
                 {
                     Process _process = new Process();
                     _process.StartInfo = new ProcessStartInfo(@$"{programPath}");
@@ -265,14 +276,13 @@ namespace WpfApp_AutoPlay
                 }
                 else
                 {
-                    consoleLog.Log("not start program");
+                    string message = "program path is empty";
+                    consoleLog.Log(message);
                 }
-
             }
             else
             {
-                string message = "no program path: " + programPath;
-                consoleLog.Log(message);
+                consoleLog.Log("do not start program");
             }
         }
 
@@ -351,6 +361,11 @@ namespace WpfApp_AutoPlay
         {
             ConsoleLog.instance.Log(jsonPath);
             readClicks = JsonConvert.DeserializeObject<List<Click>>(File.ReadAllText(jsonPath));
+            if(readClicks.Count == 0)
+            {
+                consoleLog.Log("loaded file does not have record");
+                return;
+            }
             currentRecord = 0;
             StartAutoClick();
         }
@@ -370,15 +385,22 @@ namespace WpfApp_AutoPlay
 
         private void SetMouseTimer(object? sender, EventArgs e)
         {
-            MouseController.instance.SetMousePosition(readXPos, readYPos);
-
-            percentage = (int)Math.Round(((decimal)(currentRecord + 1)) / readClicks.Count * 100);
-            SetPercentage(percentage);
-            currentRecord++;
-            NextClick();
+            if (!isPause)
+            {
+                MouseController.instance.SetMousePosition(readXPos, readYPos);
+                percentage = (int)Math.Round(((decimal)(currentRecord + 1)) / readClicks.Count * 100);
+                SetPercentage(percentage);
+                NextClick();
+            }
+            else
+            {
+                setMouseTimer.Stop();
+            }
         }
+
         private void NextClick()
         {
+            currentRecord++;
             if (currentRecord < readClicks.Count)
             {
                 //second to milisecond
@@ -389,8 +411,19 @@ namespace WpfApp_AutoPlay
             }
             else
             {
-                ConsoleLog.instance.Log("finished excecution");
-                setMouseTimer.Stop();
+                if ((bool)repeatClick.IsChecked)
+                {
+                    currentRecord = 0;
+                    StartAutoClick();
+                }
+                else
+                {
+                    ConsoleLog.instance.Log("finished excecution");
+                    setMouseTimer.Stop();
+                    isStarting = false;
+                    isPause = false;
+                    pauseButton.Content = "Pause";
+                }
             }
         }
 
@@ -653,6 +686,8 @@ namespace WpfApp_AutoPlay
             saveFileName.Text = appSetting.saveName;
             savePathBox.Text = appSetting.savePath;
             autoStartCheckBox.IsChecked = appSetting.isAutoStartChecked;
+            autoMinimize.IsChecked = appSetting.isMinimize;
+            repeatClick.IsChecked = appSetting.isRepeatClick;
 
             //assign load path
             loadProgramText.Text = appSetting.programPath;
@@ -719,6 +754,36 @@ namespace WpfApp_AutoPlay
         {
             debugBox.Text = "";
         }
+
+        private void CheckMinimize(object sender, RoutedEventArgs e)
+        {
+            appSetting.isMinimize = (bool)autoMinimize.IsChecked;
+            UpdateSetting();
+        }
+
+        private void CheckRepeatClick(object sender, RoutedEventArgs e)
+        {
+            appSetting.isRepeatClick = (bool)repeatClick.IsChecked;
+            UpdateSetting();
+        }
+
+        private void PauseGame(object sender, RoutedEventArgs e)
+        {
+            if (isStarting)
+            {
+                if (!isPause)
+                {
+                    isPause = true;
+                    pauseButton.Content = "Resume";
+                }
+                else
+                {
+                    isPause = false;
+                    pauseButton.Content = "Pause";
+                    setMouseTimer.Start();
+                }
+            }
+        }
     }
 }
 
@@ -732,6 +797,8 @@ public class AppSetting
     public string settingFolderName = "AutoClickSetting";
     public string settingSaveName = "AutoClickSetting.json";
     public bool isAutoStartChecked;
+    public bool isMinimize;
+    public bool isRepeatClick;
     public string saveName = "";
     public string savePath = "";
     public bool isLoadProgram;

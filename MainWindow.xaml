@@ -58,17 +58,26 @@
         </StackPanel>
         <!-- Start / Record Control-->
         <Grid Grid.Column="2"  Grid.Row="1">
-            <StackPanel Orientation="Horizontal"  Height="20" VerticalAlignment="Top" Margin="0 25 0 0">
+            <StackPanel Orientation="Horizontal"  Height="20" VerticalAlignment="Center" Margin="0 -150 0 0">
+                <CheckBox x:Name="autoMinimize" HorizontalAlignment="Center" Margin="5,0,5,0" Click="CheckMinimize"/>
+                <TextBlock Text="minimize " HorizontalAlignment="Right" Margin="5,0,5,0"></TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"  Height="20" Width="100" VerticalAlignment="Center" Margin="0 -100 150 0">
                 <CheckBox x:Name="autoStartCheckBox" HorizontalAlignment="Center" Margin="5,0,5,0" Click="CheckAutoStart"/>
                 <TextBlock Text="Auto Start " HorizontalAlignment="Right" Margin="5,0,5,0"></TextBlock>
             </StackPanel>
-            <StackPanel Height="20" Orientation="Horizontal" VerticalAlignment="Center" Margin="0 0 0 100">
+            <StackPanel Orientation="Horizontal"  Height="20" Width="100" VerticalAlignment="Center" Margin="0 -100 -50 0">
+                <CheckBox x:Name="repeatClick" HorizontalAlignment="Center" Margin="5,0,5,0" Click="CheckRepeatClick"/>
+                <TextBlock Text="repeat click " HorizontalAlignment="Right" Margin="5,0,5,0"></TextBlock>
+            </StackPanel>
+            <StackPanel Height="20" Orientation="Horizontal" VerticalAlignment="Center" Margin="0 -50 0 0">
                 <CheckBox x:Name="loadProgramCheckBox"  Click="CheckProgram" HorizontalAlignment="left" Margin="5 0 5 0"></CheckBox>
                 <TextBox x:Name="loadProgramText"  IsReadOnly="True" Text="" Width="100" Margin="5 0 5 0"></TextBox>
                 <Button x:Name="loadProgram" Click="ChooseLoadDirectory" Width="80" Margin="5 0 5 0">Load Program</Button>
             </StackPanel>
-            <Button x:Name="startButton" Width="74" VerticalAlignment="Center" Click="StartGame" FontSize="18" Content="Start" Height="31"/>
-            <Button x:Name="recordButton" Width="30" Height="30" Click="RecordAndStartGame" FontSize="18" HorizontalAlignment="Center" Margin="150, 0, 0, 0">
+            <Button x:Name="startButton" Width="74" VerticalAlignment="Center" Click="StartGame" FontSize="18" Content="Start" Height="31" Margin="0, 50, 0, 0"/>
+            <Button x:Name="pauseButton" Width="60" VerticalAlignment="Center" Click="PauseGame" FontSize="14" Content="Pause" Height="31" Margin="0, 50, 170, 0"/>
+            <Button x:Name="recordButton" Width="30" Height="30" Click="RecordAndStartGame" FontSize="18" HorizontalAlignment="Center" Margin="150, 50, 0, 0">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid>
@@ -92,7 +101,7 @@
                 </Button.Template>
             </Button>
             <Border x:Name="ProgressBorder" HorizontalAlignment="Center" Width="170" Height="20"
-                    BorderBrush="#BBBBBB" BorderThickness="1" Background="#F5F5F5" Margin="0,75,0,0">
+                    BorderBrush="#BBBBBB" BorderThickness="1" Background="#F5F5F5" Margin="0,125,0,0">
                 <Rectangle>
                     <Rectangle.Fill>
                         <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
