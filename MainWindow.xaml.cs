@@ -255,6 +255,9 @@ namespace WpfApp_AutoPlay
 
             }
 
+            isPause = false;
+            pauseButton.Content = "Pause";
+
             ReadJsonFile(@$"{loadPath}");
             ShowProgressBar();
 
