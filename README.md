@@ -28,6 +28,7 @@ This is a program executes pre-recorded mouse left click event, **it only runs o
 4. Wait Until the execution finish
 
 ## UI Introduction
+(version 1.0.0)
 ![Instruction](https://github.com/Shellcial/AutoClicker/blob/main/README_Images/Instruction.png)
 1. Here shows the program status and issues encountered during excecution
 2. Check it and it will auto start when open Auto Clicker
@@ -55,5 +56,11 @@ To solve this, manually set the lnk path for the *programPath* value in setting 
 - Keep the app as default resolution (720x480), otherwise UI Components will be shifted and cropped
 
 ## Changelog
+
+### 1.1.0
+* add function: minimize at start, repeat, pause and resume
+* edit some log message
+* optimize code
+
 ### 1.0.0 
 * Initial release
